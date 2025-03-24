@@ -35,13 +35,14 @@ class FutureValueFrame(ttk.Frame):
 
         self.initComponents()
 
-    def initComponents(self):
-        def clear(self):
+    def clear(self):
             self.monthlyInvestment.set("")
             self.yearlyInterestRate.set("")
             self.years.set("")
             self.futureValue.set("")
 
+    def initComponents(self):
+        
         # Display the grid of labels and text entry fields
         ttk.Label(self, text="Monthly Investment:").grid(
             column=0, row=0, sticky=tk.E)
