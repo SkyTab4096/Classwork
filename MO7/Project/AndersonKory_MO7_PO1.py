@@ -74,10 +74,10 @@ class pythagoreanFrame(ttk.Frame): # Define a frame for the application
             hypotenuse = round(math.sqrt(base ** 2 + height ** 2), 3) # Calculate the hypotenuse
             self.hypotenuse.set(hypotenuse) # Set the hypotenuse box
         else: # If there was an error, display the error message
-            messagebox.showerror("Error", self.message)
+            messagebox.showerror("Error", self.message) # Actually display the error message
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Pythagorean Theorem Calculator")
-    pythagoreanFrames(root)
-    root.mainloop()
+if __name__ == "__main__": # Run if running standalone
+    root = tk.Tk() # Create the root of the application
+    root.title("Pythagorean Theorem Calculator") # Define the title of the application
+    pythagoreanFrames(root) # Call the Frame of the application
+    root.mainloop() # Loop the application
