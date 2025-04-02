@@ -26,12 +26,12 @@ class testScoresFrame(ttk.Frame): # Defines the frame that houses the applicatio
         self.initComponents() # Calls a function to create the initial gui components
     
     def clear(self): # Defines a function to clear all entered and displayed values
-        self.testScore.set("") # Clears the test score value
+        self.testScore = [] # Clears the test score value
         self.length.set("") # Clears the length value
         self.avgScore.set("") # Clears the average score value
         self.minScore.set("") # Clears the minimum score value
         self.maxScore.set("") # Clears the maximum score value
-        self.medianScore.set("") # Clears the median score value
+        self.medianScore = [] # Clears the median score value
         self.counter.set("") # Clears the counter value
     
     def makeTestScore(self): # Defines a function to add an entry for a test score
@@ -95,35 +95,35 @@ class testScoresFrame(ttk.Frame): # Defines the frame that houses the applicatio
         for i in range(0, counter + 1): # For every value in the counter, run the following
             testScores.append(self.getInt(self.testScore[i].get(), "Test Score")) # Add the test score from the entrys, into a new array
 
-        if self.message == "":
-            length = len(testScores)
-            testScores.sort()
-            totalScore = 0
-            medianScore = []
-            for i in testScores:
-                totalScore += i
-            avgScore = totalScore / length
-            minScore = min(testScores)
-            maxScore = max(testScores)
-            medianIndex = length / 2
-            if medianIndex % 2 != 0:
-                medianIndex = int(medianIndex - .5)
-                medianScore.append(testScores[medianIndex])
-            else:
-                medianIndex1 = int(medianIndex - .5)
-                medianIndex2 = int(medianIndex + .5)
-                medianScore.append(testScores[medianIndex1])
-                medianScore.append(testScores[medianIndex2])
-            self.length.set(length)
-            self.avgScore.set(avgScore)
-            self.minScore.set(minScore)
-            self.maxScore.set(maxScore)
-            self.medianScore.set(medianScore)
-        else:
-            messagebox.showerror("Error", self.message)
+        if self.message == "": # If there was no error,
+            length = len(testScores) # Store the total number of scores
+            testScores.sort() # Sort the array of test scores
+            totalScore = 0 # Initialize the total score
+            medianScore = [] # Create a new array for the median scores
+            for i in testScores: # For every test score,
+                totalScore += i # Add the value to the total test score
+            avgScore = round(totalScore / length, 0) # Calculate the average test score
+            minScore = min(testScores) # Store the minimum test score
+            maxScore = max(testScores) # Store the maximum test score
+            medianIndex = length / 2 # Calculate the middle of the the array of test scores
+            if medianIndex % 2 != 0: # If the middle of the array is odd,
+                medianIndex = int(medianIndex - .5) # Redefine the median index as down by a half
+                medianScore.append(testScores[medianIndex]) # Store the median score in an array as the value stored in the test score array at the median index
+            else: # If the median index is even,
+                medianIndex1 = int(medianIndex - .5) # Store a new median index as the median index down by a half
+                medianIndex2 = int(medianIndex + .5) # Store another new median index as the original median index up by a half
+                medianScore.append(testScores[medianIndex1]) # Store the first median score as the value in the test score array at the first median index
+                medianScore.append(testScores[medianIndex2]) # Store the second median score as the value in the test score array at the second median index
+            self.length.set(length) # Store the total number of scores in the frame
+            self.avgScore.set(avgScore) # Store the average score in the frame
+            self.minScore.set(minScore) # Store the minimum score in the frame
+            self.maxScore.set(maxScore) # Store the maximum score in the frame
+            self.medianScore.set(medianScore) # Store the median scores in the frame
+        else: # If there was an error,
+            messagebox.showerror("Error", self.message) # Display the error
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Test Scores App")
-    testScoresFrames(root)
-    root.mainloop()            
+if __name__ == "__main__": # If running as a standalone application, run the following
+    root = tk.Tk() # Define the root of the application
+    root.title("Test Scores App") # Set the title of the application
+    testScoresFrames(root) # Call the frame to display the application
+    root.mainloop() # Loop through the main function of the application
