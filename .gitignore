@@ -1,3 +1,5 @@
 .venv
 .git
 __pychache__
+mpgOutput.csv
+trips.csv
